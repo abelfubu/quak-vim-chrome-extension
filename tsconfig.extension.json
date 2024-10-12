@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "ESNext",
+    "outDir": "./dist/browser",
+    "lib": ["dom", "es2017"],
+    "types": ["chrome"]
+  },
+  "include": ["src/extension/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}

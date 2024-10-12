@@ -1,6 +1,25 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+#angular-overlay {
+  position: fixed;
+  overflow: hidden;
+  top: 350px;
+  left: 50%;
+  width: 700px;
+  height: 50vh;
+  left: calc(50% - 350px);
+  border: none;
+  z-index: 9999;
+  border-radius: 5px;
+}
+
+.quak-vim-frame {
+  border: none;
+  outline: none;
+  display: block;
+  height: 100%;
+  width: 100%;
+  display: block;
+  background-color: transparent;
+}
 
 :root {
   --rosewater: #f5e0dc;
@@ -31,21 +50,4 @@
   --crust: #11111b;
   --inverted-text: var(--crust);
   --selection-color: var(--mauve);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-body {
-  background: #181825;
-  color: #f5e0dc;
-}
-
-.highlight {
-  color: #94e2d5;
-  font-weight: 500;
 }

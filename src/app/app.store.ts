@@ -27,8 +27,8 @@ export const AppStore = signalStore(
   withState<AppState>({ items: [], query: '', index: -1, withInitialSelection: false }),
   withComputed((store) => ({
     results: computed(() => {
-      if (!store.query()) {
-        return store.items().slice(0, 10)
+      if (!store.query() && store.withInitialSelection()) {
+        return store.items().slice(0, 8)
       }
 
       const fuse = new Fuse(store.items(), {
@@ -39,7 +39,7 @@ export const AppStore = signalStore(
 
       const filtered = fuse.search(store.query())
 
-      return filtered.slice(0, 10).map(({ item, matches }) => {
+      return filtered.slice(0, 8).map(({ item, matches }) => {
         const clonedItem = { ...item }
         matches?.forEach(({ indices, value, key }) => {
           clonedItem[key as 'title' | 'url'] = highlightMatches(String(value), indices)
@@ -90,7 +90,7 @@ export const AppStore = signalStore(
       patchState(store, { query, index: store.withInitialSelection() ? 0 : -1 })
     },
     setInitialSelection(active: boolean) {
-      patchState(store, { withInitialSelection: active })
+      patchState(store, { withInitialSelection: active, index: 0 })
     },
     setIndex(index: number) {
       if (store.index() + index < 0) {

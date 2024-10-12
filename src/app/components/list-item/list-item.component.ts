@@ -9,10 +9,10 @@ import { KbdHintComponent } from '../kbd-hint/kbd-hint.component'
   imports: [KbdHintComponent, ItemTypeIconComponent],
   template: `
     <li
-      [class.bg-[#1e1e2e]]="active()"
+      [class.bg-[var(--base)]]="active()"
       class="relative p-2 rounded-md m-1 overflow-hidden border-solid border"
-      [class.border-[#313244]]="active()"
-      [class.border-transparent]="!active()"
+      [class.border-[var(--base)]]="!active()"
+      [class.border-[var(--subtext0)]]="active()"
     >
       <div class="flex gap-2 items-center">
         <qv-item-type-icon [type]="item().type" />
@@ -29,7 +29,10 @@ import { KbdHintComponent } from '../kbd-hint/kbd-hint.component'
           class="w-[22px] h-[22px] aspect-square rounded-md"
           (error)="onImageError(img, item().chromeFaviconUrl)"
         />
-        <span [innerHTML]="item().url" class="text-[#89b4fa] font-light truncate"></span>
+        <span
+          [innerHTML]="item().url"
+          class="text-[#89b4fa] font-light truncate flex-1"
+        ></span>
       </div>
 
       @if (active()) {

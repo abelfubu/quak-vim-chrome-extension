@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { AppStore } from './app.store'
 import { InputComponent } from './components/input/input.component'
-import { ListResultsComponent } from './components/list-results/list-restults.component'
+import { ListResultsComponent } from './components/list-results/list-results.component'
 import { isValidQuakVimPanelType } from './validators/quak-vim-panel-type.validator'
 
 @Component({
@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
       throw new Error(`Unsupported action: ${action}`)
     }
 
-    if (['tab'].includes(action)) {
-      this.store.setIndex(0)
+    if (['tabs', 'bookmarks'].includes(action)) {
+      console.log(action, 'HIT')
       this.store.setInitialSelection(true)
     }
 

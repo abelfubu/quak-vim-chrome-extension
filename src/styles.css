@@ -41,11 +41,13 @@
 }
 
 body {
-  background: #181825;
-  color: #f5e0dc;
+  color: var(--rosewater);
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 11px 1px #000;
 }
 
 .highlight {
-  color: #94e2d5;
+  color: var(--sapphire);
   font-weight: 500;
 }

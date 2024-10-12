@@ -8,7 +8,7 @@ import { ListItemComponent } from '../list-item/list-item.component'
   standalone: true,
   imports: [KbdHintComponent, ListItemComponent],
   template: `
-    <ul class="h-full w-full list-none">
+    <ul class="h-full w-full list-none bg-[var(--mantle)]">
       @for (result of store.results(); track result.id) {
         <qv-list-item [item]="result" [active]="$index === store.index()" />
       }

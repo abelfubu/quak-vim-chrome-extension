@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build && npm run build:extension",
-    "build:extension": "tsc -p tsconfig.extension.json",
+    "build:extension": "esbuild src/extension/*.ts --bundle --outdir=dist/browser",
     "watch": "ng build --watch --configuration development",
     "watch:extension": "esbuild src/extension/*.ts --bundle --watch --outdir=dist/browser",
     "build:watch": "concurrently \"npm run watch\" \"npm run watch:extension\"",

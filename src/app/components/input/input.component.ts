@@ -1,10 +1,19 @@
-import { Component, effect, ElementRef, output, viewChild } from '@angular/core'
+import { Component, effect, ElementRef, inject, output, viewChild } from '@angular/core'
+import { AppStore } from '../../app.store'
+import { SIGNAL_VALUE } from '../../core/signal-value.token'
 import { DebouncedDirective } from '../../directives/debounced.directive'
+import { SearchEngineDirective } from '../../directives/search-engine.directive'
 
 @Component({
   selector: 'qv-input',
   standalone: true,
-  imports: [DebouncedDirective],
+  imports: [DebouncedDirective, SearchEngineDirective],
+  providers: [
+    {
+      provide: SIGNAL_VALUE,
+      useFactory: () => inject(AppStore).query,
+    },
+  ],
   template: `
     <div class="relative">
       <svg
@@ -21,7 +30,8 @@ import { DebouncedDirective } from '../../directives/debounced.directive'
         #input
         type="text"
         (debounced)="inputChanged.emit($event)"
-        class="text-[var(--text)] font-semibold p-5 text-xl w-full outline-none border-none pl-14 bg-[var(--crustk)]"
+        (searchEngine)="log()"
+        class="text-[var(--text)] p-5 text-xl w-full outline-none border-none pl-14 bg-[var(--crust)]"
       />
     </div>
   `,
@@ -31,4 +41,8 @@ export class InputComponent {
 
   focusInputEffect = effect(() => this.input().nativeElement.focus())
   readonly inputChanged = output<string>()
+
+  log() {
+    console.log('HIT')
+  }
 }

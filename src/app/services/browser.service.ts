@@ -3,6 +3,7 @@ import { from, map, Observable, tap } from 'rxjs'
 import { extractChildren } from '../adapters/bookmarks.adapter'
 import { historyAdapter } from '../adapters/history.adapter'
 import { tabAdapter } from '../adapters/tab.adapter'
+import { BookmarkMe } from '../custom-items/bookmark-me'
 import { QuakVimItemType } from '../models/quak-vim-item.type'
 import { QuakVimPanelItem } from '../models/quak-vim-panel-item.model'
 
@@ -50,7 +51,7 @@ export class BrowserService {
     return from(chrome.bookmarks.getTree()).pipe(
       map((items) =>
         items.reduce<QuakVimPanelItem[]>(
-          (acc, bookmark) => acc.concat(extractChildren(bookmark) || []),
+          (acc, bookmark) => acc.concat(BookmarkMe, extractChildren(bookmark) || []),
           [],
         ),
       ),

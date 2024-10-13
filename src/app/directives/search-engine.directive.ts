@@ -1,19 +1,21 @@
 import { Directive, ElementRef, inject } from '@angular/core'
 import { outputFromObservable } from '@angular/core/rxjs-interop'
-import { filter, fromEvent } from 'rxjs'
-import { SIGNAL_VALUE } from '../core/signal-value.token'
+import { filter, fromEvent, tap } from 'rxjs'
 
 @Directive({
   selector: 'input[searchEngine]',
   standalone: true,
 })
 export class SearchEngineDirective {
-  private readonly signalValue = inject(SIGNAL_VALUE)
   private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef)
 
   readonly searchEngine = outputFromObservable(
-    fromEvent<KeyboardEvent>(this.element.nativeElement, 'keyup').pipe(
-      filter((event) => event.key === ' ' && this.signalValue() === 'google'),
+    fromEvent<KeyboardEvent>(this.element.nativeElement, 'keydown').pipe(
+      filter((event) => {
+        console.log({ code: event.code, value: this.element.nativeElement.value })
+        return event.code === 'Space' && this.element.nativeElement.value === 'google'
+      }),
+      tap((event) => event.preventDefault()),
     ),
   )
 }

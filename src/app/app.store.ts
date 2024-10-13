@@ -20,11 +20,18 @@ interface AppState {
   query: string
   index: number
   withInitialSelection: boolean
+  searchEngine: string
 }
 
 export const AppStore = signalStore(
   { providedIn: 'root' },
-  withState<AppState>({ items: [], query: '', index: -1, withInitialSelection: false }),
+  withState<AppState>({
+    items: [],
+    query: '',
+    index: -1,
+    withInitialSelection: false,
+    searchEngine: '',
+  }),
   withComputed((store) => ({
     results: computed(() => {
       if (!store.query() && store.withInitialSelection()) {
@@ -65,6 +72,12 @@ export const AppStore = signalStore(
       patchState(store, { items: store.items().filter((i) => i.id !== item.id) })
     },
     newTab() {
+      if (store.searchEngine()) {
+        service.search(store.query())
+        patchState(store, { searchEngine: '' })
+        this.close()
+      }
+
       const item = this.getCurrentItem()
 
       if (!item || !item.actions.newTab) {
@@ -76,6 +89,12 @@ export const AppStore = signalStore(
       this.close()
     },
     select() {
+      if (store.searchEngine()) {
+        service.search(store.query())
+        patchState(store, { searchEngine: '' })
+        this.close()
+      }
+
       const item = this.getCurrentItem()
 
       if (!item || !item.actions.select) {
@@ -106,6 +125,9 @@ export const AppStore = signalStore(
       patchState(store, (state) => ({
         index: state.index + index,
       }))
+    },
+    setSearchEngine(searchEngine: string) {
+      patchState(store, { searchEngine, query: '' })
     },
   })),
   withMethods((store, service = inject(BrowserService)) => ({

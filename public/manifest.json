@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Quak Vim Catppuccin",
-  "version": "1.0",
-  "description": "QUak Vim Panel",
+  "name": "Quak Vim",
+  "version": "1.1",
+  "description": "Use Vim keybindings in the browser, with a great inspiration on Vimium extension",
   "permissions": [
     "tabs",
     "activeTab",
@@ -17,9 +17,6 @@
   ],
   "background": {
     "service_worker": "background.js"
-  },
-  "action": {
-    "default_title": "Generate NIF"
   },
   "icons": {
     "16": "icons/icon16.png",

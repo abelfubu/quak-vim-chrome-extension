@@ -9,14 +9,15 @@ import { KbdHintComponent } from '../kbd-hint/kbd-hint.component'
   imports: [KbdHintComponent, ItemTypeIconComponent],
   template: `
     <li
-      [class.bg-[var(--base)]]="active()"
+      [class.bg-[var(--base00)]]="active()"
       class="relative p-2 rounded-md m-1 overflow-hidden border-solid border"
-      [class.border-[var(--base)]]="!active()"
-      [class.border-[var(--subtext0)]]="active()"
-    >
+      [class.border-[var(--base00)]]="!active()"
+      [class.border-[var(--base04)]]="active()">
       <div class="flex gap-2 items-center">
         <qv-item-type-icon [type]="item().type" />
-        <span [innerHTML]="item().title" class="truncate w-full"></span>
+        <span
+          [innerHTML]="item().title"
+          class="truncate w-full text-[var(--base05)]"></span>
       </div>
 
       <div class="flex items-center gap-2">
@@ -27,18 +28,15 @@ import { KbdHintComponent } from '../kbd-hint/kbd-hint.component'
           [height]="22"
           [width]="22"
           class="w-[22px] h-[22px] aspect-square rounded-md"
-          (error)="onImageError(img, item().chromeFaviconUrl)"
-        />
+          (error)="onImageError(img, item().chromeFaviconUrl)" />
         <span
           [innerHTML]="item().url"
-          class="text-[#89b4fa] font-light truncate flex-1"
-        ></span>
+          class="text-[var(--base0D)] font-light truncate flex-1"></span>
       </div>
 
       @if (active()) {
         <div
-          class="absolute top-0 right-0 bottom-0 flex gap-2 items-center justify-end p-2 bg-[#1e1e2e]"
-        >
+          class="absolute top-0 right-0 bottom-0 flex gap-2 items-center justify-end p-2 bg-[var(--base00)]">
           @if (item().actions.close) {
             <qv-kbd-hint action="close" shortcut="CTRL+X" />
           }

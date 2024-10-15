@@ -12,7 +12,6 @@ export class SearchEngineDirective {
   readonly searchEngine = outputFromObservable(
     fromEvent<KeyboardEvent>(this.element.nativeElement, 'keydown').pipe(
       filter((event) => {
-        console.log({ code: event.code, value: this.element.nativeElement.value })
         return event.code === 'Space' && this.element.nativeElement.value === 'google'
       }),
       tap((event) => event.preventDefault()),

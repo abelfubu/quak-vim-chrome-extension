@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { from, map, Observable, tap } from 'rxjs'
+import { from, map, Observable } from 'rxjs'
 import { extractChildren } from '../adapters/bookmarks.adapter'
 import { historyAdapter } from '../adapters/history.adapter'
 import { tabAdapter } from '../adapters/tab.adapter'
@@ -55,7 +55,6 @@ export class BrowserService {
           [],
         ),
       ),
-      tap(console.log),
     )
   }
 

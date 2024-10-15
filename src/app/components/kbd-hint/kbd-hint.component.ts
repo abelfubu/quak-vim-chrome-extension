@@ -18,12 +18,12 @@ import { Component, HostAttributeToken, inject } from '@angular/core'
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica,
         Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
       font-size: 13px;
-      color: #b4befe;
+      color: var(--base07);
       line-height: 1.5;
       text-align: center;
       border-radius: 4px;
-      background-color: #181825;
-      border: 1px solid #313244;
+      background-color: var(--base01);
+      border: 1px solid var(--base02);
     }
   `,
 })

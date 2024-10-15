@@ -25,15 +25,16 @@ import { isValidQuakVimPanelType } from './validators/quak-vim-panel-type.valida
 export class AppComponent implements OnInit {
   protected readonly store = inject(AppStore)
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const action = new URL(window.location.href).searchParams.get('action')
+    const theme = await chrome.storage.sync.get<{ theme: string }>('theme')
+    document.body.setAttribute('class', theme?.theme || 'catppuccin')
 
     if (!isValidQuakVimPanelType(action)) {
       throw new Error(`Unsupported action: ${action}`)
     }
 
     if (['tabs', 'bookmarks'].includes(action)) {
-      console.log(action, 'HIT')
       this.store.setInitialSelection(true)
     }
 

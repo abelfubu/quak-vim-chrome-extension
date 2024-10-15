@@ -57,9 +57,9 @@ export const LinkHighlighter = {
       element.getAttribute('tabindex') !== '-1'
     )
   },
-  createBackdrop() {
-    console.log(window.scrollY)
+  createBackdrop(cssClass: string) {
     const backdrop = document.createElement('div')
+    backdrop.setAttribute('class', cssClass || 'tokyo-night')
     backdrop.style.position = 'absolute'
     backdrop.style.top = window.scrollY + 'px'
     backdrop.style.height = '100vh'
@@ -71,15 +71,15 @@ export const LinkHighlighter = {
     const { top, left } = element.getBoundingClientRect()
     const badge = document.createElement('span')
     badge.id = 'quak-vim-link-match'
-    badge.style.backgroundColor = 'var(--base)'
-    badge.style.color = 'var(--text)'
+    badge.style.backgroundColor = 'var(--base00)'
+    badge.style.color = 'var(--base05)'
     badge.style.padding = '2px 4px'
     badge.style.borderRadius = '4px'
     badge.style.position = 'absolute'
     badge.style.top = `${top}px`
     badge.style.left = `${left}px`
     badge.style.fontSize = '14px'
-    badge.style.border = '1px solid var(--lavender)'
+    badge.style.border = '1px solid var(--base07)'
     badge.innerHTML = key
       .split('')
       .map((l) => `<span id="${l}">${l}</span>`)
@@ -92,13 +92,14 @@ export const LinkHighlighter = {
         badge.remove()
       } else {
         const letter = badge.querySelector<HTMLSpanElement>(`#${term}`)!
-        letter.style.color = 'var(--yellow)'
+        letter.style.color = 'var(--base0A)'
       }
     }
   },
-  init() {
+  async init() {
+    const theme = await chrome.storage.sync.get<{ theme: string }>('theme')
     const linksMap = new Map<string, LinkReference>()
-    const backdrop = this.createBackdrop()
+    const backdrop = this.createBackdrop(theme?.theme)
     const elements = this.getVisibleLinks()
     const keys =
       elements.length > this.keySource.length
@@ -119,6 +120,8 @@ export const LinkHighlighter = {
     document.addEventListener('keydown', setTyped)
 
     function setTyped(event: KeyboardEvent) {
+      event.preventDefault()
+
       if (event.key === 'Escape') {
         backdrop.remove()
         document.removeEventListener('keydown', setTyped)

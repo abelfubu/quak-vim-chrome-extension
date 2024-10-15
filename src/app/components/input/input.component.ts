@@ -16,7 +16,7 @@ import { SearchEngineDirective } from '../../directives/search-engine.directive'
         class="absolute left-4 top-6 w-[22px] h-[22px]">
         <path
           d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-          fill="var(--text)" />
+          fill="var(--base05)" />
       </svg>
       <input
         #input
@@ -24,7 +24,7 @@ import { SearchEngineDirective } from '../../directives/search-engine.directive'
         [value]="store.query()"
         (debounced)="inputChanged.emit($event)"
         (searchEngine)="store.setSearchEngine(input.value)"
-        class="text-[var(--text)] p-5 text-xl w-full outline-none border-none pl-14 bg-[var(--crust)]" />
+        class="text-[var(--base05)] p-5 text-xl w-full outline-none border-none pl-14 bg-[var(--base00)]" />
 
       <small class="absolute left-2 top-1">
         {{ store.searchEngine() | uppercase }}
@@ -38,8 +38,4 @@ export class InputComponent {
 
   focusInputEffect = effect(() => this.input().nativeElement.focus())
   readonly inputChanged = output<string>()
-
-  onSearchEngine() {
-    this.store.setSearchEngine(this.store.query())
-  }
 }

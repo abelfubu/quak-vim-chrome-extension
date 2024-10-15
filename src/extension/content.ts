@@ -1,9 +1,16 @@
 import { LinkHighlighter } from './link-highlighter'
 import { performScroll } from './scroller'
 
-const createOverlay = (extensionId: string, action: 'tabs' | 'bookmarks' | 'history') => {
+async function createOverlay(
+  extensionId: string,
+  action: 'tabs' | 'bookmarks' | 'history',
+) {
+  const theme = await chrome.storage.sync.get<{ theme: string }>('theme')
   const overlay = document.createElement('div')
   overlay.id = 'angular-overlay'
+
+  overlay.setAttribute('class', theme?.theme || 'catppuccin')
+
   document.body.appendChild(overlay)
 
   overlay.innerHTML = `<iframe class="quak-vim-frame" src="chrome-extension://${extensionId}/index.html?action=${action}" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>`
@@ -17,6 +24,7 @@ chrome.runtime.onMessage.addListener((request) => {
 
 window.addEventListener('keydown', (event) => {
   if (
+    event.ctrlKey ||
     ['INPUT', 'TEXTAREA'].includes(document.activeElement!.tagName) ||
     document.activeElement?.hasAttribute('contenteditable')
   ) {

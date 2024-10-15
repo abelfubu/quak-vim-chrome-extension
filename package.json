@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && npm run build:extension",
-    "build:extension": "esbuild src/extension/*.ts --bundle --outdir=dist/browser",
+    "build": "ng build && ng build --project options --base-href ./options && npm run build:extension",
+    "build:extension": "esbuild src/extension/*.ts --bundle --outdir=dist",
     "watch": "ng build --watch --configuration development",
-    "watch:extension": "esbuild src/extension/*.ts --bundle --watch --outdir=dist/browser",
-    "build:watch": "concurrently \"npm run watch\" \"npm run watch:extension\"",
+    "watch:options": "ng build --watch --project options --base-href ./options --configuration development",
+    "watch:extension": "esbuild src/extension/*.ts --bundle --watch --outdir=dist",
+    "build:watch": "concurrently \"npm run watch\" \"npm run watch:options\" \"npm run watch:extension\"",
     "test": "ng test"
   },
   "private": true,
@@ -24,7 +25,9 @@
     "@ngrx/operators": "^18.0.2",
     "@ngrx/signals": "^18.0.2",
     "fuse.js": "^7.0.0",
+    "primeng": "^18.0.0-beta.2",
     "rxjs": "~7.8.0",
+    "tailwindcss-primeui": "^0.3.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },

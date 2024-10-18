@@ -6,6 +6,7 @@ import { SettingsService } from './settings.service'
 })
 export class ThemeService {
   private readonly theme = inject(SettingsService).get((s) => s.theme)
+
   readonly themes = [
     {
       label: 'Catppuccin',

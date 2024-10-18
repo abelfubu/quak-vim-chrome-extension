@@ -24,7 +24,7 @@ import { SearchEngineDirective } from '../../directives/search-engine.directive'
         [value]="store.query()"
         (debounced)="inputChanged.emit($event)"
         (searchEngine)="store.setSearchEngine(input.value)"
-        class="text-[var(--base05)] p-5 text-xl w-full outline-none border-none pl-14 bg-[var(--base00)]" />
+        class="text-[var(--base05)] p-5 text-xl w-full outline-none border-none pl-14 bg-[#111111]" />
 
       <small class="absolute left-2 top-1">
         {{ store.searchEngine() | uppercase }}

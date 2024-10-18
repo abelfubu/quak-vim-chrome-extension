@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && ng build --project options --base-href ./options && npm run build:extension",
+    "build": "ng build --project command-palette && ng build --project options --base-href ./options && npm run build:extension",
     "build:extension": "esbuild src/extension/*.ts --bundle --outdir=dist",
-    "watch": "ng build --watch --configuration development",
-    "watch:options": "ng build --watch --project options --base-href ./options --configuration development",
+    "watch": "ng build --project=command-palette --watch --configuration development",
+    "watch:options": "ng build --project=options --watch --base-href ./options --configuration development",
     "watch:extension": "esbuild src/extension/*.ts --bundle --watch --outdir=dist",
     "build:watch": "concurrently \"npm run watch\" \"npm run watch:options\" \"npm run watch:extension\"",
     "test": "ng test"

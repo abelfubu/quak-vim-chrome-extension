@@ -3,7 +3,7 @@ import { from, Observable, tap } from 'rxjs'
 
 interface Settings {
   theme: string
-  keybindings: {}
+  keybindings: Record<string, string>
 }
 
 @Injectable({

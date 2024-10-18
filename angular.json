@@ -27,7 +27,9 @@
             "browser": "projects/command-palette/src/main.ts",
             "tsConfig": "projects/command-palette/tsconfig.app.json",
             "deleteOutputPath": false,
-            "styles": ["projects/command-palette/src/styles.css"],
+            "styles": [
+              "projects/command-palette/src/styles.css"
+            ],
             "assets": [
               {
                 "glob": "**/*",
@@ -87,8 +89,20 @@
                 "input": "public"
               }
             ],
-            "styles": ["projects/command-palette/src/styles.css"],
+            "styles": [
+              "projects/command-palette/src/styles.css"
+            ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/command-palette/**/*.ts",
+              "projects/command-palette/**/*.html"
+            ],
+            "eslintConfig": "projects/command-palette/eslint.config.js"
           }
         }
       }
@@ -121,7 +135,9 @@
                 "input": "projects/options/public"
               }
             ],
-            "styles": ["projects/options/src/styles.css"],
+            "styles": [
+              "projects/options/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -176,7 +192,19 @@
                 "input": "projects/options/public"
               }
             ],
-            "styles": ["projects/options/src/styles.css"]
+            "styles": [
+              "projects/options/src/styles.css"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/options/**/*.ts",
+              "projects/options/**/*.html"
+            ],
+            "eslintConfig": "projects/options/eslint.config.js"
           }
         }
       }

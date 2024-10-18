@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'
+import { Component, inject, OnInit } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms'
 import { PrimeNGConfig } from 'primeng/api'
@@ -56,7 +56,7 @@ const MyPreset = definePreset(Aura, {
     </main>
   `,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private readonly config = inject(PrimeNGConfig)
   private readonly formBuilder = inject(FormBuilder)
   protected readonly theme = inject(ThemeService)
@@ -70,7 +70,7 @@ export class AppComponent {
     .pipe(takeUntilDestroyed())
     .subscribe((value) => this.settings.set(value))
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.form.patchValue(
       { theme: this.settings.get((s) => s.theme)() },
       { emitEvent: false },

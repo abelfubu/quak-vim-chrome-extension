@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
+import { ThemeService } from '@quak-vim/core'
 import { AppStore } from './app.store'
 import { InputComponent } from './components/input/input.component'
 import { ListResultsComponent } from './components/list-results/list-results.component'
@@ -24,11 +25,11 @@ import { isValidQuakVimPanelType } from './validators/quak-vim-panel-type.valida
 })
 export class AppComponent implements OnInit {
   protected readonly store = inject(AppStore)
+  private readonly theme = inject(ThemeService)
 
   async ngOnInit(): Promise<void> {
+    this.theme.init()
     const action = new URL(window.location.href).searchParams.get('action')
-    const theme = await chrome.storage.sync.get<{ theme: string }>('theme')
-    document.body.setAttribute('class', theme?.theme || 'catppuccin')
 
     if (!isValidQuakVimPanelType(action)) {
       throw new Error(`Unsupported action: ${action}`)
@@ -37,7 +38,5 @@ export class AppComponent implements OnInit {
     if (['tabs', 'bookmarks'].includes(action)) {
       this.store.setInitialSelection(true)
     }
-
-    this.store.load(action)
   }
 }

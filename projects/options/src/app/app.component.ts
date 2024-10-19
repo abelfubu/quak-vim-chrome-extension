@@ -1,13 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms'
+import { SettingsService, ThemeService } from '@quak-vim/core'
 import { PrimeNGConfig } from 'primeng/api'
 import { SelectModule } from 'primeng/select'
 import { definePreset } from 'primeng/themes'
 import { Aura } from 'primeng/themes/aura'
 import { HeaderComponent } from './components/header/header.component'
-import { SettingsService } from './core/settings.service'
-import { ThemeService } from './core/theme.service'
 
 const MyPreset = definePreset(Aura, {
   semantic: {

@@ -4,15 +4,6 @@
     <meta charset="utf-8" />
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <script>
-      const meta = document.createElement('meta')
-      meta.content =
-        document.querySelector('meta[name="color-scheme"]')?.content ?? 'light'
-      meta.name = 'color-scheme'
-      meta.key = '1'
-      document.head.appendChild(meta)
-    </script>
   </head>
   <body>
     <qv-root></qv-root>

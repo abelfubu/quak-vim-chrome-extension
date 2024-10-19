@@ -20,8 +20,10 @@ import { SearchEngineDirective } from '../../directives/search-engine.directive'
       </svg>
       <input
         #input
+        [spellcheck]="false"
         type="text"
         [value]="store.query()"
+        (blur)="store.closeTab()"
         (debounced)="inputChanged.emit($event)"
         (searchEngine)="store.setSearchEngine(input.value)"
         class="text-[var(--base05)] p-5 text-xl w-full outline-none border-none pl-14 bg-[#111111]" />

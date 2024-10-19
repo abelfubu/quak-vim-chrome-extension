@@ -1,11 +1,13 @@
 import { effect, inject, Injectable } from '@angular/core'
-import { SettingsService } from './settings.service'
+import { SettingsService } from '../settings/settings.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
   private readonly theme = inject(SettingsService).get((s) => s.theme)
+
+  private readonly elements: HTMLElement[] = [document.body]
 
   readonly themes = [
     {
@@ -38,7 +40,13 @@ export class ThemeService {
     },
   ]
 
+  init(...elements: HTMLElement[]): void {
+    this.elements.concat(elements)
+  }
+
   themeChanged = effect(() => {
-    document.body.setAttribute('class', this.theme())
+    this.elements.forEach((element) => {
+      element.setAttribute('class', this.theme())
+    })
   })
 }

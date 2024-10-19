@@ -1,10 +1,6 @@
 import { computed, Injectable, Signal, signal } from '@angular/core'
 import { from, Observable, tap } from 'rxjs'
-
-interface Settings {
-  theme: string
-  keybindings: Record<string, string>
-}
+import { Settings } from './settings.model'
 
 @Injectable({
   providedIn: 'root',

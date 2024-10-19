@@ -5,11 +5,8 @@ async function createOverlay(
   extensionId: string,
   action: 'tabs' | 'bookmarks' | 'history',
 ) {
-  const theme = await chrome.storage.sync.get<{ theme: string }>('theme')
   const overlay = document.createElement('div')
   overlay.id = 'angular-overlay'
-
-  overlay.setAttribute('class', theme?.theme || 'catppuccin')
 
   document.body.appendChild(overlay)
 

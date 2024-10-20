@@ -59,9 +59,10 @@ export const LinkHighlighter = {
   },
   createBackdrop(cssClass: string) {
     const backdrop = document.createElement('div')
-    backdrop.setAttribute('class', cssClass || 'tokyo-night')
+    backdrop.setAttribute('class', cssClass || 'catppuccin')
     backdrop.style.position = 'absolute'
     backdrop.style.top = window.scrollY + 'px'
+    backdrop.style.left = '0'
     backdrop.style.height = '100vh'
     backdrop.style.width = '100vw'
     backdrop.style.zIndex = '9998'

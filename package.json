@@ -27,6 +27,7 @@
     "@ngrx/operators": "^18.0.2",
     "@ngrx/signals": "^18.0.2",
     "fuse.js": "^7.0.0",
+    "primeicons": "^7.0.0",
     "primeng": "^18.0.0-beta.2",
     "rxjs": "~7.8.0",
     "tailwindcss-primeui": "^0.3.4",

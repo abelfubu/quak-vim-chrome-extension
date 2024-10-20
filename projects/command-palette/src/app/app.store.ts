@@ -20,7 +20,7 @@ interface AppState {
   query: string
   index: number
   withInitialSelection: boolean
-  searchEngine: string
+  searchEngine: null | { prefix: string; url: string }
 }
 
 export const AppStore = signalStore(
@@ -30,7 +30,7 @@ export const AppStore = signalStore(
     query: '',
     index: -1,
     withInitialSelection: false,
-    searchEngine: '',
+    searchEngine: null,
   }),
   withComputed((store) => ({
     results: computed(() => {
@@ -73,9 +73,12 @@ export const AppStore = signalStore(
     },
     newTab() {
       if (store.searchEngine()) {
-        service.search(store.query())
-        patchState(store, { searchEngine: '' })
         this.close()
+        service.navigateToInNewTab(
+          (store.searchEngine()?.url || '').replace('$', store.query()),
+        )
+        patchState(store, { searchEngine: null })
+        return
       }
 
       const item = this.getCurrentItem()
@@ -90,9 +93,10 @@ export const AppStore = signalStore(
     },
     select() {
       if (store.searchEngine()) {
-        service.search(store.query())
-        patchState(store, { searchEngine: '' })
         this.close()
+        service.navigateTo((store.searchEngine()?.url || '').replace('$', store.query()))
+        patchState(store, { searchEngine: null })
+        return
       }
 
       const item = this.getCurrentItem()
@@ -126,7 +130,7 @@ export const AppStore = signalStore(
         index: state.index + index,
       }))
     },
-    setSearchEngine(searchEngine: string) {
+    setSearchEngine(searchEngine: { prefix: string; url: string }) {
       patchState(store, { searchEngine, query: '' })
     },
   })),
@@ -137,6 +141,7 @@ export const AppStore = signalStore(
           service.load(action).pipe(
             tapResponse({
               next: (items) => patchState(store, { items }),
+              // eslint-disable-next-line no-console
               error: console.error,
             }),
           ),

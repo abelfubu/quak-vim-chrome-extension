@@ -1,4 +1,4 @@
 export interface Settings {
   theme: string
-  keybindings: Record<string, string>
+  searchEngines: { prefix: string; url: string }[]
 }

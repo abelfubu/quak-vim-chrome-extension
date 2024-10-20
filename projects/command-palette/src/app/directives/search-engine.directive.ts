@@ -1,6 +1,7 @@
 import { Directive, ElementRef, inject } from '@angular/core'
 import { outputFromObservable } from '@angular/core/rxjs-interop'
-import { filter, fromEvent, tap } from 'rxjs'
+import { SettingsService } from '@quak-vim/core'
+import { filter, fromEvent, map } from 'rxjs'
 
 @Directive({
   selector: 'input[searchEngine]',
@@ -8,13 +9,21 @@ import { filter, fromEvent, tap } from 'rxjs'
 })
 export class SearchEngineDirective {
   private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef)
+  private readonly settings = inject(SettingsService)
 
   readonly searchEngine = outputFromObservable(
     fromEvent<KeyboardEvent>(this.element.nativeElement, 'keydown').pipe(
-      filter((event) => {
-        return event.code === 'Space' && this.element.nativeElement.value === 'google'
+      filter(({ code }) => code === 'Space'),
+      filter(() => {
+        const searchEngines = this.settings.get((s) => s.searchEngines)()
+        return searchEngines.some((e) => e.prefix === this.element.nativeElement.value)
       }),
-      tap((event) => event.preventDefault()),
+      map((event) => {
+        event.preventDefault()
+        return this.settings
+          .get((s) => s.searchEngines)()
+          .find((e) => e.prefix === this.element.nativeElement.value)!
+      }),
     ),
   )
 }

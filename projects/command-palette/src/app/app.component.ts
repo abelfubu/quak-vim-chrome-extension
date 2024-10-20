@@ -38,5 +38,7 @@ export class AppComponent implements OnInit {
     if (['tabs', 'bookmarks'].includes(action)) {
       this.store.setInitialSelection(true)
     }
+
+    this.store.load(action)
   }
 }

@@ -23,13 +23,12 @@ import { SearchEngineDirective } from '../../directives/search-engine.directive'
         [spellcheck]="false"
         type="text"
         [value]="store.query()"
-        (blur)="store.closeTab()"
         (debounced)="inputChanged.emit($event)"
-        (searchEngine)="store.setSearchEngine(input.value)"
+        (searchEngine)="store.setSearchEngine($event)"
         class="text-[var(--base05)] p-5 text-xl w-full outline-none border-none pl-14 bg-[#111111]" />
 
       <small class="absolute left-2 top-1">
-        {{ store.searchEngine() | uppercase }}
+        {{ store.searchEngine()?.prefix || '' | uppercase }}
       </small>
     </div>
   `,

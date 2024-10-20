@@ -37,11 +37,21 @@ export class BrowserService {
     )
   }
 
-  search(term: string) {
+  navigateToInNewTab(url: string): void {
+    chrome.tabs.create({ active: true, url })
+  }
+
+  navigateTo(url: string): void {
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }).then(([tab]) => {
+      chrome.tabs.update(Number(tab.id), { active: true, url })
+    })
+  }
+
+  search(term: string): Promise<void> {
     return chrome.search.query({ text: term })
   }
 
-  searchInNewTab(term: string) {
+  searchInNewTab(term: string): void {
     chrome.tabs.create({ active: true }).then((tab) => {
       return chrome.search.query({ text: term, tabId: tab.id })
     })
@@ -58,7 +68,7 @@ export class BrowserService {
     )
   }
 
-  close() {
+  close(): void {
     chrome.tabs.query({ active: true }).then(([tab]) => {
       chrome.tabs.sendMessage(Number(tab.id), { action: 'close' })
     })

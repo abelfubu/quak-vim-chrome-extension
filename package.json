@@ -8,6 +8,7 @@
     "build:extension": "esbuild src/extension/*.ts --bundle --outdir=dist",
     "watch": "ng build --project=command-palette --watch --configuration development",
     "watch:options": "ng build --project=options --watch --base-href ./options --configuration development",
+    "watch:commands": "ng build --project=commands --watch --base-href ./commands --configuration development",
     "watch:extension": "esbuild src/extension/*.ts --bundle --watch --outdir=dist",
     "build:watch": "concurrently \"npm run watch\" \"npm run watch:options\" \"npm run watch:extension\"",
     "test": "ng test",

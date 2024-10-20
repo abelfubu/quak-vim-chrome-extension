@@ -13,7 +13,7 @@ export function tabAdapter(item: chrome.tabs.Tab): QuakVimPanelItem {
     windowId: item.windowId,
     actions: {
       select: () => chrome.tabs.update(Number(item.id), { active: true }),
-      close: () => chrome.tabs.remove(Number(item.id)).catch(console.error),
+      close: () => chrome.tabs.remove(Number(item.id)),
     },
   }
 }

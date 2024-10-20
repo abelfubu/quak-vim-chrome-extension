@@ -60,8 +60,6 @@ export class SettingsService {
   init(): Observable<Settings> {
     return from(chrome.storage.sync.get<Settings>(null)).pipe(
       tap((s) => this.settings.set({ ...s, commands: this.settings().commands })),
-      // eslint-disable-next-line no-console
-      tap((settings) => console.log(JSON.stringify(settings, null, 2))),
     )
   }
 

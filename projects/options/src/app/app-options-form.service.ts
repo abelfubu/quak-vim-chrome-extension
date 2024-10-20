@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, Validators } from '@angular/forms'
-import { Settings, ThemeService } from '@quak-vim/core'
+import { ThemeService } from '@quak-vim/core'
+import { Settings } from '@quak-vim/models'
 import { debounceTime, distinctUntilChanged } from 'rxjs'
 
 @Injectable()
@@ -27,7 +28,9 @@ export class AppOptionsFormService {
     distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
   )
 
-  getRawValue(): Settings {
+  // 20/10/2024
+  // TODO: This should not be partial when commands is complete
+  getRawValue(): Partial<Settings> {
     return this.form.getRawValue()
   }
 

@@ -35,7 +35,13 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["index.html", "main.js", "options/index.html", "options/main.js"],
+      "resources": [
+        "index.html",
+        "main.js",
+        "options/index.html",
+        "options/main.js",
+        "commands/index.html"
+      ],
       "matches": ["<all_urls>"]
     }
   ]

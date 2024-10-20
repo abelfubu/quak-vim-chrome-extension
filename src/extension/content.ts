@@ -3,14 +3,15 @@ import { performScroll } from './scroller'
 
 async function createOverlay(
   extensionId: string,
-  action: 'tabs' | 'bookmarks' | 'history',
+  page: string,
+  overlayId = 'angular-overlay',
 ) {
   const overlay = document.createElement('div')
-  overlay.id = 'angular-overlay'
+  overlay.id = overlayId
 
   document.body.appendChild(overlay)
 
-  overlay.innerHTML = `<iframe class="quak-vim-frame" src="chrome-extension://${extensionId}/index.html?action=${action}" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>`
+  overlay.innerHTML = `<iframe class="quak-vim-frame" src="chrome-extension://${extensionId}/${page}" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>`
 }
 
 chrome.runtime.onMessage.addListener((request) => {
@@ -29,15 +30,15 @@ window.addEventListener('keydown', (event) => {
   }
 
   if (event.key === 'b') {
-    createOverlay(chrome.runtime.id, 'bookmarks')
+    createOverlay(chrome.runtime.id, 'index.html?action=bookmarks')
   }
 
   if (event.key === 'T') {
-    createOverlay(chrome.runtime.id, 'tabs')
+    createOverlay(chrome.runtime.id, 'index.html?action=tabs')
   }
 
   if (event.key === 'o') {
-    createOverlay(chrome.runtime.id, 'history')
+    createOverlay(chrome.runtime.id, 'index.html?action=history')
   }
 
   if (event.key === 'f') {
@@ -62,6 +63,10 @@ window.addEventListener('keydown', (event) => {
 
   if (event.key === 'j') {
     performScroll('y', 25)
+  }
+
+  if (event.key === '?') {
+    createOverlay(chrome.runtime.id, 'commands/index.html')
   }
 })
 

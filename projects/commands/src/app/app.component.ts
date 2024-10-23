@@ -1,11 +1,12 @@
 import { TitleCasePipe, UpperCasePipe } from '@angular/common'
 import { Component, ElementRef, inject, OnInit } from '@angular/core'
 import { SettingsService, ThemeService } from '@quak-vim/core'
+import { KbdComponent } from '@quak-vim/ui'
 
 @Component({
   selector: 'qvc-root',
   standalone: true,
-  imports: [UpperCasePipe, TitleCasePipe],
+  imports: [UpperCasePipe, TitleCasePipe, KbdComponent],
   host: {
     '(window:keydown.Escape)': 'close()',
     '(window:blur)': 'close()',
@@ -23,18 +24,18 @@ import { SettingsService, ThemeService } from '@quak-vim/core'
 
             <div>
               @if (command.shortcut.ctrl) {
-                <kbd class="key text-xs" data-key="Ctrl"></kbd>
+                <kbd quak-vim-kbd class="text-xs" data-key="Ctrl"></kbd>
               }
 
               @if (command.shortcut.shift) {
-                <kbd class="key text-xs" data-key="Shift"></kbd>
+                <kbd quak-vim-kbd class="key text-xs" data-key="Shift"></kbd>
               }
 
               @if (command.shortcut.alt) {
-                <kbd class="key text-xs" data-key="Alt"></kbd>
+                <kbd quak-vim-kbd class="key text-xs" data-key="Alt"></kbd>
               }
 
-              <kbd class="key" [attr.data-key]="command.shortcut.key | uppercase"></kbd>
+              <kbd quak-vim-kbd [attr.data-key]="command.shortcut.key | uppercase"></kbd>
             </div>
           </div>
         }

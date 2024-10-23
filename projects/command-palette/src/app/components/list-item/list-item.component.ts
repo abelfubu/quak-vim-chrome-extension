@@ -8,9 +8,10 @@ import { KbdHintComponent } from '../kbd-hint/kbd-hint.component'
   standalone: true,
   imports: [KbdHintComponent, ItemTypeIconComponent],
   template: `
+    <!-- [class.bg-[var(--base00)]]="active()" -->
     <li
-      [class.bg-[var(--base00)]]="active()"
-      class="relative p-2 rounded-md m-1 overflow-hidden border-solid border"
+      class="relative p-2 rounded-md m-1 overflow-hidden border-solid border shadow-custom"
+      [class.active]="active()"
       [class.border-[var(--base00)]]="!active()"
       [class.border-[var(--base04)]]="active()">
       <div class="flex gap-2 items-center">
@@ -30,18 +31,22 @@ import { KbdHintComponent } from '../kbd-hint/kbd-hint.component'
           class="w-[22px] h-[22px] aspect-square rounded-md"
           (error)="onImageError(img, item().chromeFaviconUrl)" />
         <span
-          [innerHTML]="item().url"
+          [innerHTML]="item().url.split('').slice(0, 60).join('')"
           class="text-[var(--base0D)] font-light truncate flex-1"></span>
       </div>
 
       @if (active()) {
         <div
-          class="absolute top-0 right-0 bottom-0 flex gap-2 items-center justify-end p-2 bg-[var(--base00)]">
+          class="absolute top-0 right-0 bottom-0 flex gap-2 items-center justify-end p-2">
           @if (item().actions.close) {
-            <qv-kbd-hint action="close" shortcut="CTRL+X" />
+            <qv-kbd-hint
+              action="close"
+              [shortcut]="{ ctrl: true, key: 'X', alt: false, shift: false }" />
           }
           @if (item().actions.newTab) {
-            <qv-kbd-hint action="new tab" shortcut="CTRL+Enter" />
+            <qv-kbd-hint
+              action="new tab"
+              [shortcut]="{ ctrl: true, key: 'Enter', alt: false, shift: false }" />
           }
         </div>
       }

@@ -5,7 +5,8 @@
   "compilerOptions": {
     "paths": {
       "@quak-vim/core": ["./dist/core"],
-      "@quak-vim/models": ["./dist/models"]
+      "@quak-vim/models": ["./dist/models"],
+      "@quak-vim/ui": ["./dist/ui"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

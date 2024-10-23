@@ -1,33 +1,38 @@
-import { Component, HostAttributeToken, inject } from '@angular/core'
+import { Component, HostAttributeToken, inject, input } from '@angular/core'
+import { Shortcut } from '@quak-vim/models'
+import { KbdComponent } from '@quak-vim/ui'
 
 @Component({
   selector: 'qv-kbd-hint',
   standalone: true,
+  imports: [KbdComponent],
   template: `
-    <kbd class="flex">
-      <small>{{ action }}</small>
-      <small>{{ shortcut }}</small>
-    </kbd>
-  `,
-  styles: `
-    kbd {
-      display: flex;
-      flex-direction: column;
-      min-width: 21px;
-      padding: 8px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica,
-        Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-      font-size: 13px;
-      color: var(--base07);
-      line-height: 1.5;
-      text-align: center;
-      border-radius: 4px;
-      background-color: var(--base01);
-      border: 1px solid var(--base02);
-    }
+    <div class="flex flex-col items-center gap-1">
+      <small class="text-xs">{{ action }}</small>
+
+      <div class="flex gap-0.5">
+        @if (shortcut().ctrl) {
+          <kbd class="text-xs" height="28px" quak-vim-kbd data-key="Ctrl"></kbd>
+        }
+
+        @if (shortcut().shift) {
+          <kbd class="text-xs" height="28px" quak-vim-kbd data-key="Shift"></kbd>
+        }
+
+        @if (shortcut().alt) {
+          <kbd class="text-xs" height="28px" quak-vim-kbd data-key="Alt"></kbd>
+        }
+
+        <kbd
+          class="text-xs"
+          height="28px"
+          quak-vim-kbd
+          [attr.data-key]="shortcut().key"></kbd>
+      </div>
+    </div>
   `,
 })
 export class KbdHintComponent {
   protected readonly action = inject(new HostAttributeToken('action'))
-  protected readonly shortcut = inject(new HostAttributeToken('shortcut'))
+  readonly shortcut = input.required<Shortcut>()
 }

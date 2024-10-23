@@ -27,9 +27,7 @@
             "browser": "projects/command-palette/src/main.ts",
             "tsConfig": "projects/command-palette/tsconfig.app.json",
             "deleteOutputPath": false,
-            "styles": [
-              "projects/command-palette/src/styles.css"
-            ],
+            "styles": ["projects/command-palette/src/styles.css"],
             "assets": [
               {
                 "glob": "**/*",
@@ -89,9 +87,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "projects/command-palette/src/styles.css"
-            ],
+            "styles": ["projects/command-palette/src/styles.css"],
             "scripts": []
           }
         },
@@ -135,9 +131,7 @@
                 "input": "projects/options/public"
               }
             ],
-            "styles": [
-              "projects/options/src/styles.css"
-            ],
+            "styles": ["projects/options/src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -192,9 +186,7 @@
                 "input": "projects/options/public"
               }
             ],
-            "styles": [
-              "projects/options/src/styles.css"
-            ]
+            "styles": ["projects/options/src/styles.css"]
           }
         },
         "lint": {
@@ -266,9 +258,7 @@
                 "input": "projects/commands/public"
               }
             ],
-            "styles": [
-              "projects/commands/src/styles.css"
-            ],
+            "styles": ["projects/commands/src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -317,9 +307,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/commands/tsconfig.spec.json",
-            "styles": [
-              "projects/commands/src/styles.css"
-            ],
+            "styles": ["projects/commands/src/styles.css"],
             "scripts": []
           }
         },
@@ -360,10 +348,36 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/models/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
+          }
+        }
+      }
+    },
+    "ui": {
+      "projectType": "library",
+      "root": "projects/ui",
+      "sourceRoot": "projects/ui/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ui/tsconfig.spec.json"
           }
         }
       }

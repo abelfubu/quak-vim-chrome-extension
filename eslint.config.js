@@ -18,14 +18,6 @@ module.exports = tseslint.config(
     processor: angular.processInlineTemplates,
     rules: {
       'no-console': 'error',
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'app',
-          style: 'kebab-case',
-        },
-      ],
     },
   },
   {

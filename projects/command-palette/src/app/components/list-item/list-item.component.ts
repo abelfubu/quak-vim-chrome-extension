@@ -37,7 +37,7 @@ import { KbdHintComponent } from '../kbd-hint/kbd-hint.component'
 
       @if (active()) {
         <div
-          class="absolute top-0 right-0 bottom-0 flex gap-2 items-center justify-end p-2 bg-[var(--base00)]">
+          class="absolute top-0 right-0 bottom-0 flex gap-2 items-center justify-end p-2 bg-[var(--base01)]">
           @if (item().actions.close) {
             <qv-kbd-hint
               action="close"

@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core'
-import { RouterOutlet } from '@angular/router'
 import { ThemeService } from '@quak-vim/core'
 import { AppStore } from './app.store'
 import { InputComponent } from './components/input/input.component'
@@ -9,7 +8,7 @@ import { isValidQuakVimPanelType } from './validators/quak-vim-panel-type.valida
 @Component({
   selector: 'qv-root',
   standalone: true,
-  imports: [RouterOutlet, InputComponent, ListResultsComponent],
+  imports: [InputComponent, ListResultsComponent],
   host: {
     '(window:keyup.Escape)': 'store.close()',
     '(window:keydown.ArrowUp)': '$event.preventDefault();store.setIndex(-1)',
@@ -27,7 +26,7 @@ export class AppComponent implements OnInit {
   protected readonly store = inject(AppStore)
   private readonly theme = inject(ThemeService)
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.theme.init()
     const action = new URL(window.location.href).searchParams.get('action')
 

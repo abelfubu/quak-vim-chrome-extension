@@ -88,8 +88,8 @@ export const AppStore = signalStore(
         return
       }
 
-      item.actions.newTab()
       this.close()
+      item.actions.newTab()
     },
     select() {
       if (store.searchEngine()) {

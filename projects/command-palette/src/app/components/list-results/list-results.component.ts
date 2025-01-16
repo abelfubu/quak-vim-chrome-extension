@@ -1,12 +1,10 @@
 import { Component, inject } from '@angular/core'
 import { AppStore } from '../../app.store'
-import { KbdHintComponent } from '../kbd-hint/kbd-hint.component'
 import { ListItemComponent } from '../list-item/list-item.component'
 
 @Component({
   selector: 'qv-list-results',
-  standalone: true,
-  imports: [KbdHintComponent, ListItemComponent],
+  imports: [ListItemComponent],
   template: `
     <ul class="h-full w-full list-none bg-[var(--base01)]">
       @for (result of store.results(); track result.id) {

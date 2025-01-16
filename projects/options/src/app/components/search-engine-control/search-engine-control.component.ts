@@ -4,10 +4,9 @@ import { ButtonModule } from 'primeng/button'
 import { InputTextModule } from 'primeng/inputtext'
 
 @Component({
-  selector: 'qvo-search-engine-control',
-  standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, ButtonModule],
-  template: `
+    selector: 'qvo-search-engine-control',
+    imports: [ReactiveFormsModule, InputTextModule, ButtonModule],
+    template: `
     <div [formGroup]="form()">
       <div class="flex gap-2">
         <label class="w-1/6" for="prefix">Prefix</label>
@@ -19,7 +18,7 @@ import { InputTextModule } from 'primeng/inputtext'
         <p-button icon="pi pi-trash" (click)="removeSearchEngine.emit()" />
       </div>
     </div>
-  `,
+  `
 })
 export class SearchEngineControlComponent {
   form = input.required<FormGroup>()

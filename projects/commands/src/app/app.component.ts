@@ -1,12 +1,11 @@
-import { TitleCasePipe, UpperCasePipe } from '@angular/common'
+import { UpperCasePipe } from '@angular/common'
 import { Component, ElementRef, inject, OnInit } from '@angular/core'
 import { SettingsService, ThemeService } from '@quak-vim/core'
 import { KbdComponent } from '@quak-vim/ui'
 
 @Component({
   selector: 'qvc-root',
-  standalone: true,
-  imports: [UpperCasePipe, TitleCasePipe, KbdComponent],
+  imports: [UpperCasePipe, KbdComponent],
   host: {
     '(window:keydown.Escape)': 'close()',
     '(window:blur)': 'close()',

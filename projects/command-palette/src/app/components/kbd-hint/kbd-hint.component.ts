@@ -3,10 +3,9 @@ import { Shortcut } from '@quak-vim/models'
 import { KbdComponent } from '@quak-vim/ui'
 
 @Component({
-  selector: 'qv-kbd-hint',
-  standalone: true,
-  imports: [KbdComponent],
-  template: `
+    selector: 'qv-kbd-hint',
+    imports: [KbdComponent],
+    template: `
     <div class="flex flex-col items-center gap-1">
       <small class="text-xs">{{ action }}</small>
 
@@ -30,7 +29,7 @@ import { KbdComponent } from '@quak-vim/ui'
           [attr.data-key]="shortcut().key"></kbd>
       </div>
     </div>
-  `,
+  `
 })
 export class KbdHintComponent {
   protected readonly action = inject(new HostAttributeToken('action'))

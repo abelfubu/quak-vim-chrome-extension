@@ -4,10 +4,9 @@ import { ItemTypeIconComponent } from '../item-type-icon/item-type-icon.componen
 import { KbdHintComponent } from '../kbd-hint/kbd-hint.component'
 
 @Component({
-  selector: 'qv-list-item',
-  standalone: true,
-  imports: [KbdHintComponent, ItemTypeIconComponent],
-  template: `
+    selector: 'qv-list-item',
+    imports: [KbdHintComponent, ItemTypeIconComponent],
+    template: `
     <!-- [class.bg-[var(--base00)]]="active()" -->
     <li
       class="relative p-2 rounded-md m-1 overflow-hidden border-solid border shadow-custom"
@@ -52,11 +51,11 @@ import { KbdHintComponent } from '../kbd-hint/kbd-hint.component'
       }
     </li>
   `,
-  styles: `
+    styles: `
     :host {
       font-size: 18px;
     }
-  `,
+  `
 })
 export class ListItemComponent {
   readonly item = input.required<QuakVimPanelItem>()

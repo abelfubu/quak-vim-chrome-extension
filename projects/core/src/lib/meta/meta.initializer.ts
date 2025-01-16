@@ -1,10 +1,8 @@
-import { ENVIRONMENT_INITIALIZER } from '@angular/core'
+import { provideEnvironmentInitializer } from '@angular/core'
 
 export function metaInitializer() {
-  return {
-    provide: ENVIRONMENT_INITIALIZER,
-    multi: true,
-    useFactory: () => {
+  return provideEnvironmentInitializer(() => {
+        const initializerFn = (() => {
       return () => {
         const meta = document.createElement('meta')
         meta.content =
@@ -14,6 +12,7 @@ export function metaInitializer() {
         document.head.appendChild(meta)
         return Promise.resolve()
       }
-    },
-  }
+    })();
+        return initializerFn();
+      })
 }

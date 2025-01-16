@@ -6,21 +6,20 @@ import { ListResultsComponent } from './components/list-results/list-results.com
 import { isValidQuakVimPanelType } from './validators/quak-vim-panel-type.validator'
 
 @Component({
-  selector: 'qv-root',
-  standalone: true,
-  imports: [InputComponent, ListResultsComponent],
-  host: {
-    '(window:keyup.Escape)': 'store.close()',
-    '(window:keydown.ArrowUp)': '$event.preventDefault();store.setIndex(-1)',
-    '(window:keydown.ArrowDown)': '$event.preventDefault();store.setIndex(1)',
-    '(window:keydown.control.x)': '$event.preventDefault();store.closeTab()',
-    '(window:keydown.Enter)': 'store.select()',
-    '(window:keydown.control.Enter)': 'store.newTab()',
-  },
-  template: `
+    selector: 'qv-root',
+    imports: [InputComponent, ListResultsComponent],
+    host: {
+        '(window:keyup.Escape)': 'store.close()',
+        '(window:keydown.ArrowUp)': '$event.preventDefault();store.setIndex(-1)',
+        '(window:keydown.ArrowDown)': '$event.preventDefault();store.setIndex(1)',
+        '(window:keydown.control.x)': '$event.preventDefault();store.closeTab()',
+        '(window:keydown.Enter)': 'store.select()',
+        '(window:keydown.control.Enter)': 'store.newTab()',
+    },
+    template: `
     <qv-input (inputChanged)="store.setQuery($event)" />
     <qv-list-results />
-  `,
+  `
 })
 export class AppComponent implements OnInit {
   protected readonly store = inject(AppStore)

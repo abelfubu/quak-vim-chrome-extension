@@ -5,10 +5,9 @@ import { DebouncedDirective } from '../../directives/debounced.directive'
 import { SearchEngineDirective } from '../../directives/search-engine.directive'
 
 @Component({
-  selector: 'qv-input',
-  standalone: true,
-  imports: [DebouncedDirective, SearchEngineDirective, UpperCasePipe],
-  template: `
+    selector: 'qv-input',
+    imports: [DebouncedDirective, SearchEngineDirective, UpperCasePipe],
+    template: `
     <div class="relative">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +30,7 @@ import { SearchEngineDirective } from '../../directives/search-engine.directive'
         {{ store.searchEngine()?.prefix || '' | uppercase }}
       </small>
     </div>
-  `,
+  `
 })
 export class InputComponent {
   private readonly input = viewChild.required<ElementRef<HTMLInputElement>>('input')

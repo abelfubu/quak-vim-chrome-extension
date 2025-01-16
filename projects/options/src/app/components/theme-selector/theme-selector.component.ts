@@ -8,10 +8,9 @@ interface Theme {
 }
 
 @Component({
-  selector: 'qvo-theme-selector',
-  standalone: true,
-  imports: [SelectModule, FormsModule],
-  template: `
+    selector: 'qvo-theme-selector',
+    imports: [SelectModule, FormsModule],
+    template: `
     <label class="mb-2 block" for="theme">Choose a theme</label>
 
     <p-select
@@ -22,18 +21,18 @@ interface Theme {
       [(ngModel)]="value"
       (ngModelChange)="[onChange($event), onTouched()]" />
   `,
-  styles: `
+    styles: `
     :host {
       display: block;
     }
   `,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: ThemeSelectorComponent,
-      multi: true,
-    },
-  ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: ThemeSelectorComponent,
+            multi: true,
+        },
+    ]
 })
 export class ThemeSelectorComponent implements ControlValueAccessor {
   readonly themes = input.required<Theme[]>()

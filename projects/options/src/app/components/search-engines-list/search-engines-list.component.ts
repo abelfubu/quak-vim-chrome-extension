@@ -4,10 +4,9 @@ import { AppOptionsFormService } from '../../app-options-form.service'
 import { SearchEngineControlComponent } from '../search-engine-control/search-engine-control.component'
 
 @Component({
-  selector: 'qvo-search-engines-list',
-  standalone: true,
-  imports: [SearchEngineControlComponent, ButtonModule],
-  template: `
+    selector: 'qvo-search-engines-list',
+    imports: [SearchEngineControlComponent, ButtonModule],
+    template: `
     <div formArrayName="searchEngines" class="flex flex-col gap-4">
       <label class="mb-2 block" for="search-engines">Search Engines</label>
 
@@ -29,7 +28,7 @@ import { SearchEngineControlComponent } from '../search-engine-control/search-en
           (click)="options.addSearchEngine()"></p-button>
       </div>
     </div>
-  `,
+  `
 })
 export class SearchEnginesListComponent {
   protected readonly options = inject(AppOptionsFormService)

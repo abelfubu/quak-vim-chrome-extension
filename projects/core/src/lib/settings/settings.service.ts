@@ -8,6 +8,7 @@ import { from, Observable, tap } from 'rxjs'
 export class SettingsService {
   private readonly settings = signal<Settings>({
     theme: 'catppuccin',
+    raindropToken: '',
     searchEngines: [],
     commands: [
       {

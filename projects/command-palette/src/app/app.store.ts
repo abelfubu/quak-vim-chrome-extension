@@ -14,6 +14,7 @@ import { QuakVimItemType } from './models/quak-vim-item.type'
 import { QuakVimPanelItem } from './models/quak-vim-panel-item.model'
 import { BrowserService } from './services/browser.service'
 import { highlightMatches } from './utils/highlight-matches.util'
+import { AppFacade } from './app.facade'
 
 interface AppState {
   items: QuakVimPanelItem[]
@@ -134,7 +135,7 @@ export const AppStore = signalStore(
       patchState(store, { searchEngine, query: '' })
     },
   })),
-  withMethods((store, service = inject(BrowserService)) => ({
+  withMethods((store, service = inject(AppFacade)) => ({
     load: rxMethod<QuakVimItemType>(
       pipe(
         switchMap((action) =>

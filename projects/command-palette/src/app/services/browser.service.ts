@@ -4,29 +4,12 @@ import { extractChildren } from '../adapters/bookmarks.adapter'
 import { historyAdapter } from '../adapters/history.adapter'
 import { tabAdapter } from '../adapters/tab.adapter'
 import { BookmarkMe } from '../custom-items/bookmark-me'
-import { QuakVimItemType } from '../models/quak-vim-item.type'
 import { QuakVimPanelItem } from '../models/quak-vim-panel-item.model'
 
 @Injectable({
   providedIn: 'root',
 })
 export class BrowserService {
-  load(action: QuakVimItemType): Observable<QuakVimPanelItem[]> {
-    if (action === 'tabs') {
-      return this.getTabs()
-    }
-
-    if (action === 'bookmarks') {
-      return this.getBookmarks()
-    }
-
-    if (action === 'history') {
-      return this.getHistory()
-    }
-
-    throw new Error(`Unsupported action: ${action}`)
-  }
-
   getTabs(): Observable<QuakVimPanelItem[]> {
     return from(chrome.tabs.query({})).pipe(map((items) => items.map(tabAdapter)))
   }

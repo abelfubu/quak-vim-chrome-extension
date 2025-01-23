@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http'
 import {
   ApplicationConfig,
   provideExperimentalZonelessChangeDetection,
@@ -8,6 +9,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideExperimentalZonelessChangeDetection(),
     initializeSettings(),
+    provideHttpClient(),
     metaInitializer(),
   ],
 }

@@ -9,20 +9,20 @@ import { SearchEnginesListComponent } from './components/search-engines-list/sea
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component'
 
 @Component({
-    selector: 'qvo-root',
-    imports: [
-        DividerModule,
-        HeaderComponent,
-        ReactiveFormsModule,
-        ThemeSelectorComponent,
-        SearchEnginesListComponent,
-    ],
-    providers: [AppOptionsFormService],
-    host: {
-        class: 'block',
-        style: 'font-size: 18px',
-    },
-    template: `
+  selector: 'qvo-root',
+  imports: [
+    DividerModule,
+    HeaderComponent,
+    ReactiveFormsModule,
+    ThemeSelectorComponent,
+    SearchEnginesListComponent,
+  ],
+  providers: [AppOptionsFormService],
+  host: {
+    class: 'block',
+    style: 'font-size: 18px',
+  },
+  template: `
     <qvo-header />
 
     <main class="p-4 flex flex-col gap-4">
@@ -36,9 +36,21 @@ import { ThemeSelectorComponent } from './components/theme-selector/theme-select
         <p-divider />
 
         <qvo-search-engines-list />
+
+        <p-divider />
+
+        <div>
+          <label class="mb-2 block" for="raindropToken">Raindrop.io Token</label>
+          <input
+            type="text"
+            id="raindropToken"
+            pInputText
+            class="px-3 py-2 w-full"
+            formControlName="raindropToken" />
+        </div>
       </form>
     </main>
-  `
+  `,
 })
 export class AppComponent implements OnInit {
   protected readonly options = inject(AppOptionsFormService)

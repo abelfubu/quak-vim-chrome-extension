@@ -5,4 +5,5 @@ export interface Settings {
   theme: string
   searchEngines: SearchEngine[]
   commands: Command[]
+  raindropToken: string
 }

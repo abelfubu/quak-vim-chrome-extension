@@ -12,6 +12,7 @@ export class AppOptionsFormService {
 
   readonly form = this.formBuilder.nonNullable.group({
     theme: '',
+    raindropToken: '',
     searchEngines: this.formBuilder.nonNullable.array([
       this.formBuilder.nonNullable.group({
         prefix: ['', Validators.required],
